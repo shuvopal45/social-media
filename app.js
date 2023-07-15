@@ -16,7 +16,7 @@ const middleware = [
 
 app.get('/', (req, res, next) => {
     res.json({
-        message: 'This is server for API!'
+        message: 'Finally This is connected!'
     })
 })
 
