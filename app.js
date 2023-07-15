@@ -23,9 +23,8 @@ app.get('/', (req, res, next) => {
 app.use(middleware)
 app.use(router)
 
-const PORT = process.env.PORT || 9090
-const URI = process.env.MONGO_URI
-mongoose.connect(URI, {
+const PORT = 9090
+mongoose.connect('mongodb+srv://shuvo:kwI0tkSMq6c9aUnY@cluster0.2pulu.mongodb.net/facebook', {
     useNewUrlParser: true, useUnifiedTopology: true
 }).then(() => {
     if (mongoose.connection) {
