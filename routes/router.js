@@ -20,7 +20,7 @@ const upload = multer({
     storage: storage
 }).single('image')
 
-router.post('/register', upload, async (req, res, next) => {
+router.post('/register', async (req, res, next) => {
     try {
         const { username, pin } = req.body
         const findUser = await User.findOne({ username })
@@ -30,7 +30,7 @@ router.post('/register', upload, async (req, res, next) => {
             return res.status(400).json('User already exist!')
         } else {
             const user = new User({
-                username, password: hashedPin, profilePic: req.file.filename
+                username, password: hashedPin
             })
             const saveUser = await user.save()
             if (saveUser) {
