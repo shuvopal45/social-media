@@ -16,7 +16,7 @@ const middleware = [
 
 app.get('/', (req, res, next) => {
     res.json({
-        message: 'This is server for API!'
+        message: 'Finally I am successed to host node js application!'
     })
 })
 
