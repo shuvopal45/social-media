@@ -16,15 +16,16 @@ const middleware = [
 
 app.get('/', (req, res, next) => {
     res.json({
-        message: 'Finally I am successed to host node js application!'
+        message: 'This is server for API!'
     })
 })
 
 app.use(middleware)
 app.use(router)
 
-const PORT = 9090
-mongoose.connect('mongodb+srv://shuvo:kwI0tkSMq6c9aUnY@cluster0.2pulu.mongodb.net/facebook', {
+const PORT = process.env.PORT || 9090
+const URI = process.env.MONGO_URI
+mongoose.connect(URI, {
     useNewUrlParser: true, useUnifiedTopology: true
 }).then(() => {
     if (mongoose.connection) {
