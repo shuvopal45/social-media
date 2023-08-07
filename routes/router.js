@@ -2,23 +2,23 @@ const express = require('express')
 const router = express.Router()
 const User = require('../models/Users')
 const bcrypt = require('bcrypt')
-const multer = require('multer')
+// const multer = require('multer')
 
-const UPLOAD_FOLDER = '../../src/uploads/'
+// const UPLOAD_FOLDER = '../../src/uploads/'
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, UPLOAD_FOLDER)
-    },
-    filename: (req, file, cb) => {
-        const fileName = file.fieldname + "-" + Date.now() + "-" + file.originalname
-        cb(null, fileName)
-    }
-})
+// const storage = multer.diskStorage({
+//     destination: (_req, _file, cb) => {
+//         cb(null, UPLOAD_FOLDER)
+//     },
+//     filename: (req, file, cb) => {
+//         const fileName = file.fieldname + "-" + Date.now() + "-" + file.originalname
+//         cb(null, fileName)
+//     }
+// })
 
-const upload = multer({
-    storage: storage
-}).single('image')
+// const upload = multer({
+//     storage: storage
+// }).single('image')
 
 router.post('/register', async (req, res, next) => {
     try {
