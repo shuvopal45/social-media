@@ -22,7 +22,8 @@ const bcrypt = require('bcrypt')
 
 router.post('/register', async (req, res, next) => {
     try {
-        const { username, pin } = req.body
+        const { username, pin, image } = req.body
+        console.log(image)
         const findUser = await User.findOne({ username })
         const salt = await bcrypt.genSalt(11)
         const hashedPin = await bcrypt.hash(pin, salt)
