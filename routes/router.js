@@ -4,7 +4,7 @@ const User = require('../models/Users')
 const bcrypt = require('bcrypt')
 const multer = require('multer')
 
-const UPLOAD_FOLDER = '../../Facebook/src/server/'
+const UPLOAD_FOLDER = '../../src/uploads/'
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -20,7 +20,7 @@ const upload = multer({
     storage: storage
 }).single('image')
 
-router.post('/register', async (req, res, next) => {
+router.post('/register', upload, async (req, res, next) => {
     try {
         const { username, pin } = req.body
         const findUser = await User.findOne({ username })
@@ -30,7 +30,7 @@ router.post('/register', async (req, res, next) => {
             return res.status(400).json('User already exist!')
         } else {
             const user = new User({
-                username, password: hashedPin
+                username, password: hashedPin, profilePic: req.file.fileName
             })
             const saveUser = await user.save()
             if (saveUser) {
