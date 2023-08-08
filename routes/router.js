@@ -22,7 +22,7 @@ const bcrypt = require('bcrypt')
 
 router.post('/register', async (req, res, next) => {
     try {
-        const { username, pin, image } = req.body
+        const { username, pin, file } = req.body
         console.log(image)
         const findUser = await User.findOne({ username })
         const salt = await bcrypt.genSalt(11)
@@ -31,7 +31,7 @@ router.post('/register', async (req, res, next) => {
             return res.status(400).json('User already exist!')
         } else {
             const user = new User({
-                username, password: hashedPin
+                username, password: hashedPin, profilePic: file
             })
             const saveUser = await user.save()
             if (saveUser) {
