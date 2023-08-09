@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 const User = require('../models/Users')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+const { checkLogin } = require('../middleware/authMiddleware')
 
 router.post('/register', async (req, res, next) => {
     try {
@@ -38,7 +40,16 @@ router.post('/login', async (req, res, next) => {
             if (!match) {
                 return res.status(400).json("Incorrect Pin!")
             } else {
-                return res.status(200).json("Login Successfull!")
+                const token = jwt.sign({
+                    username: findUser.username,
+                    userId: findUser._id
+                }, process.env.SECRET_KEY, {
+                    expiresIn: '7d'
+                })
+                return res.status(200).json({
+                    token: token,
+                    message: "Login Successfull!"
+                })
             }
         }
     } catch(err) {
