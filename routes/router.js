@@ -3,7 +3,7 @@ const router = express.Router()
 const User = require('../models/Users')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const { checkLogin } = require('../middleware/authMiddleware')
+const checkLogin = require('../middleware/checkLogin')
 
 router.post('/register', async (req, res, next) => {
     try {
@@ -52,6 +52,14 @@ router.post('/login', async (req, res, next) => {
                 })
             }
         }
+    } catch(err) {
+        console.log(err)
+    }
+})
+
+router.get('/user', checkLogin, async (req, res, next) => {
+    try {
+        const user = await User.findOne({ _id: req.userId })
     } catch(err) {
         console.log(err)
     }
