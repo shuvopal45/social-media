@@ -40,14 +40,14 @@ router.post('/login', async (req, res, next) => {
             if (!match) {
                 return res.status(400).json("Incorrect Pin!")
             } else {
-                // const token = jwt.sign({
-                //     username: findUser.username,
-                //     userId: findUser._id
-                // }, process.env.SECRET_KEY, {
-                //     expiresIn: '7d'
-                // })
+                const token = jwt.sign({
+                    username: findUser.username,
+                    userId: findUser._id
+                }, 'ahsdgashgdjsaghasygfashgfasjkhgfksgfasfgsafgasjgasjhgasjfga76tuy', {
+                    expiresIn: '7d'
+                })
                 return res.status(200).json({
-                    token: "token",
+                    token: token,
                     message: "Login Successfull!"
                 })
             }
