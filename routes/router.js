@@ -57,9 +57,9 @@ router.post('/login', async (req, res, next) => {
     }
 })
 
-router.get('/user', async (req, res, next) => {
+router.get('/user', checkLogin, async (req, res, next) => {
     try {
-        const user = await User.findOne({ username: 'shuvopal90' })
+        const user = await User.findOne({ _id: req.userId })
         return res.status(200).json(user)
     } catch(err) {
         console.log(err)
