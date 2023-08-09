@@ -34,7 +34,7 @@ router.post('/login', async (req, res, next) => {
         if (!findUser) {
             return res.status(400).json("This user not found!")
         } else {
-            const match = await bcrypt.compare(findUser.password, pin)
+            const match = await bcrypt.compare(pin, findUser.password)
             if (!match) {
                 return res.status(400).json("Incorrect Pin!")
             } else {
